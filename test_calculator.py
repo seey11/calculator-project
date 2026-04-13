@@ -52,5 +52,19 @@ class TestCalculator(unittest.TestCase):
             divide(5, 0)
         self.assertIn("Cannot divide by zero", str(ctx.exception))
 
+    def test_divide_negative(self):
+        """음수 나눗셈"""
+        self.assertEqual(divide(-10, 2), -5.0)
+
+    def test_multiply_float(self):
+        """소수점 곱셈"""
+        self.assertAlmostEqual(multiply(0.1, 0.2), 0.02, places=5)
+
+    def test_divide_by_zero_msg(self):
+        """에러 메시지에 divisor 값 포함 확인"""
+        with self.assertRaises(ValueError) as ctx:
+            divide(5, 0)
+        self.assertIn("divisor was 0", str(ctx.exception))
+
 if __name__ == '__main__':
     unittest.main()
